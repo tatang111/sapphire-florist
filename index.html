@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sapphire Florist - Luxury Flower Boutique</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Poppins:wght@300;400;500&display=swap');
+
+        :root {
+            --primary: #005b96;
+            --secondary: #5d8aff;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f9f9f9;
+            color: var(--dark);
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .hero-bg {
+            background: linear-gradient(rgba(0, 91, 150, 0.8), rgba(0, 91, 150, 0.8)),
+                url('https://placehold.co/1920x1080') center/cover no-repeat;
+        }
+
+        .transition-all {
+            transition: all 0.3s ease;
+        }
+
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .flower-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Hide all pages by default */
+        .page {
+            display: none;
+        }
+
+        /* Show active page */
+        .active-page {
+            display: block;
+        }
+
+        .nav-link.active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .logo {
+            background: linear-gradient(135deg, #005b96 0%, #5d8aff 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Splash Screen -->
+    <div id="splash-screen" class="page fixed inset-0 flex items-center justify-center bg-white z-50 active-page">
+        <div class="text-center animate-pulse">
+            <img src="https://placehold.co/150x150"
+                alt="Sapphire Florist logo with sapphire gem and flower design in blue tones"
+                class="w-32 h-32 mx-auto mb-6">
+            <h1 class="text-3xl font-bold logo mb-2">Sapphire Florist</h1>
+            <p class="text-blue-600">Luxury Blooms & Bespoke Arrangements</p>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div id="app" class="min-h-screen flex flex-col" style="display: none;">
+        <!-- Header -->
+        <header class="bg-white shadow-sm sticky top-0 z-40">
+            <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex items-center">
+                        <a href="#" onclick="navigateTo('home')" class="text-xl font-bold flex items-center">
+                            <img src="https://placehold.co/40x40" alt="Small Sapphire Florist logo icon"
+                                class="h-6 w-6 mr-2">
+                            <span class="logo">Sapphire Florist</span>
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <button onclick="navigateTo('search')" class="p-2 rounded-full hover:bg-blue-50 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                        <button onclick="navigateTo('cart')"
+                            class="p-2 rounded-full hover:bg-blue-50 transition-all relative">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                            </svg>
+                            <span id="cart-count"
+                                class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                        </button>
+                        <button onclick="navigateTo('profile')"
+                            class="p-2 rounded-full hover:bg-blue-50 transition-all">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex-grow">
+            <!-- Home Page -->
+            <div id="home-page" class="page">
+                <!-- Hero Section -->
+                <section class="hero-bg text-white py-32">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                        <h1 class="text-5xl font-bold mb-6">Where Every Petal Tells a Story</h1>
+                        <p class="text-xl mb-8 max-w-3xl mx-auto">Handcrafted floral arrangements designed with passion
+                            for life's special moments</p>
+                        <div class="flex justify-center space-x-4">
+                            <button onclick="navigateTo('catalog')"
+                                class="bg-white text-blue-800 hover:bg-blue-50 px-8 py-3 rounded-md font-medium transition-all">Shop
+                                Now</button>
+                            <button onclick="navigateTo('about')"
+                                class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-800 px-8 py-3 rounded-md font-medium transition-all">Learn
+                                More</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Featured Collections -->
+                <section class="py-16 bg-white">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl font-bold text-center mb-12">Our Signature Collections</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="bg-white rounded-lg overflow-hidden shadow-md flower-card card-hover">
+                                <img src="https://placehold.co/800x600"
+                                    alt="Elegant arrangement of white roses and calla lilies in a silver vase"
+                                    class="w-full h-64 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">Classic Elegance</h3>
+                                    <p class="text-gray-700 mb-4">Timeless white blooms for sophisticated occasions</p>
+                                    <button onclick="navigateTo('catalog')"
+                                        class="text-blue-600 hover:text-blue-800 font-medium">View Collection</button>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg overflow-hidden shadow-md flower-card card-hover">
+                                <img src="https://placehold.co/800x600"
+                                    alt="Vibrant tropical flowers including birds of paradise and orchids"
+                                    class="w-full h-64 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">Tropical Paradise</h3>
+                                    <p class="text-gray-700 mb-4">Exotic blooms that transport you to island
+                                        destinations</p>
+                                    <button onclick="navigateTo('catalog')"
+                                        class="text-blue-600 hover:text-blue-800 font-medium">View Collection</button>
+                                </div>
+                            </div>
+                            <div class="bg-white rounded-lg overflow-hidden shadow-md flower-card card-hover">
+                                <img src="https://placehold.co/800x600"
+                                    alt="Romantic red roses arrangement with candle accents"
+                                    class="w-full h-64 object-cover">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold mb-2">Romantic Moments</h3>
+                                    <p class="text-gray-700 mb-4">Passionate reds and soft pinks for love celebrations
+                                    </p>
+                                    <button onclick="navigateTo('catalog')"
+                                        class="text-blue-600 hover:text-blue-800 font-medium">View Collection</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Testimonials -->
+                <section class="py-16 bg-blue-50">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <h2 class="text-3xl font-bold text-center mb-12">What Our Customers Say</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://placehold.co/60x60"
+                                        alt="Portrait of Sarah Johnson, happy customer"
+                                        class="w-12 h-12 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-bold">Sarah Johnson</h4>
+                                        <div class="flex text-yellow-400">
+                                            ★ ★ ★ ★ ★
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700">"The wedding bouquet was even more beautiful than I imagined.
+                                    Their attention to detail is exceptional!"</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://placehold.co/60x60"
+                                        alt="Portrait of Michael Chen, satisfied customer"
+                                        class="w-12 h-12 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-bold">Michael Chen</h4>
+                                        <div class="flex text-yellow-400">
+                                            ★ ★ ★ ★ ★
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700">"I've been ordering monthly arrangements for my office and they
+                                    always impress clients and staff alike."</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg shadow-sm">
+                                <div class="flex items-center mb-4">
+                                    <img src="https://placehold.co/60x60"
+                                        alt="Portrait of Emily Rodriguez, returning customer"
+                                        class="w-12 h-12 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-bold">Emily Rodriguez</h4>
+                                        <div class="flex text-yellow-400">
+                                            ★ ★ ★ ★ ★
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-gray-700">"The anniversary arrangement was stunning and arrived right on
+                                    time. Perfect way to celebrate 10 years!"</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Login Page (User) -->
+            <div id="login-user-page" class="page max-w-md mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-8">
+                    <img src="https://placehold.co/100x100" alt="Sapphire Florist login page logo"
+                        class="w-20 h-20 mx-auto mb-4">
+                    <h2 class="text-3xl font-bold text-gray-800">Customer Login</h2>
+                    <p class="mt-2 text-gray-600">Sign in to access your account</p>
+                </div>
+                <div class="bg-white py-8 px-6 shadow rounded-lg">
+                    <form id="user-login-form">
+                        <div class="mb-4">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                            <input type="email" id="email" name="email" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <input type="password" id="password" name="password" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center">
+                                <input id="remember-me" name="remember-me" type="checkbox"
+                                    class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                <label for="remember-me" class="ml-2 block text-sm text-gray-700">Remember me</label>
+                            </div>
+                            <div class="text-sm">
+                                <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Forgot password?</a>
+                            </div>
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-all">Sign
+                            in</button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <p class="text-sm text-gray-600">
+                            New customer?
+                            <a href="#" onclick="navigateTo('register')"
+                                class="font-medium text-blue-600 hover:text-blue-500">Create an account</a>
+                        </p>
+                    </div>
+                    <div class="mt-6 border-t pt-6 text-center">
+                        <p class="text-sm text-gray-600">Are you an admin? <a href="#"
+                                onclick="navigateTo('login-admin')"
+                                class="font-medium text-blue-600 hover:text-blue-500">Admin login</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Login Page (Admin) -->
+            <div id="login-admin-page" class="page max-w-md mx-auto py-12 px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-8">
+                    <img src="https://placehold.co/100x100" alt="Sapphire Florist admin portal logo"
+                        class="w-20 h-20 mx-auto mb-4">
+                    <h2 class="text-3xl font-bold text-gray-800">Admin Portal</h2>
+                    <p class="mt-2 text-gray-600">Access your management dashboard</p>
+                </div>
+                <div class="bg-white py-8 px-6 shadow rounded-lg">
+                    <form id="admin-login-form">
+                        <div class="mb-4">
+                            <label for="admin-email" class="block text-sm font-medium text-gray-700 mb-1">Admin
+                                Email</label>
+                            <input type="email" id="admin-email" name="admin-email" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="admin-password"
+                                class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+                            <input type="password" id="admin-password" name="admin-password" required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <button type="submit"
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-all">Sign
+                            in</button>
+                    </form>
+                    <div class="mt-6 text-center">
+                        <a href="#" onclick="navigateTo('login-user')"
+                            class="font-medium text-blue-600 hover:text-blue-500">Back to customer login</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Page -->
+            <div id="profile-page" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="bg-white shadow rounded-lg overflow-hidden">
+                    <div class="bg-blue-600 h-32 relative">
+                        <div class="absolute -bottom-16 left-6">
+                            <div
+                                class="h-32 w-32 rounded-full border-4 border-white bg-blue-100 flex items-center justify-center overflow-hidden">
+                                <img src="https://placehold.co/300x300" alt="User profile picture"
+                                    class="h-full w-full object-cover">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-20 pb-6 px-6">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h3 class="text-2xl font-bold">John Doe</h3>
+                                <p class="text-gray-600">Member since June 2021</p>
+                            </div>
+                            <button onclick="navigateTo('edit-profile')"
+                                class="text-blue-600 hover:text-blue-800 font-medium">Edit Profile</button>
+                        </div>
+
+                        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-bold text-lg mb-3">Account Details</h4>
+                                <div class="space-y-3">
+                                    <div>
+                                        <label class="text-sm text-gray-500">Email</label>
+                                        <p>john.doe@example.com</p>
+                                    </div>
+                                    <div>
+                                        <label class="text-sm text-gray-500">Phone</label>
+                                        <p>(555) 123-4567</p>
+                                    </div>
+                                    <div>
+                                        <label class="text-sm text-gray-500">Preferences</label>
+                                        <p>Special occasions, Premium collection</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-bold text-lg mb-3">Saved Addresses</h4>
+                                <div class="space-y-4">
+                                    <div class="border-b pb-3">
+                                        <div class="flex justify-between">
+                                            <h5 class="font-medium">Primary Address</h5>
+                                            <span
+                                                class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Default</span>
+                                        </div>
+                                        <p class="text-sm mt-1">123 Flower Lane, Apt 4B, New York, NY 10001</p>
+                                    </div>
+                                    <button onclick="navigateTo('address')"
+                                        class="w-full text-center text-blue-600 hover:text-blue-800 font-medium">Manage
+                                        Addresses</button>
+                                </div>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-bold text-lg mb-3">Recent Orders</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <div class="flex justify-between">
+                                            <h5 class="font-medium">#ORD-28765</h5>
+                                            <span
+                                                class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Delivered</span>
+                                        </div>
+                                        <p class="text-sm text-gray-600">Classic White Bouquet • June 5, 2023</p>
+                                        <p class="text-sm font-medium mt-1">$79.99</p>
+                                    </div>
+                                    <button onclick="navigateTo('order-history')"
+                                        class="w-full text-center text-blue-600 hover:text-blue-800 font-medium">View
+                                        All Orders</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search Page -->
+            <div id="search-page" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="mb-8">
+                    <h1 class="text-2xl font-bold mb-4">Find the Perfect Flowers</h1>
+                    <div class="relative">
+                        <input type="text" placeholder="Search for flowers, bouquets..."
+                            class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-8">
+                    <h2 class="text-xl font-bold mb-4">Popular Searches</h2>
+                    <div class="flex flex-wrap gap-2">
+                        <button
+                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-all">Anniversary</button>
+                        <button
+                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-all">Birthday</button>
+                        <button
+                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-all">Wedding</button>
+                        <button
+                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-all">Roses</button>
+                        <button
+                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-all">Sympathy</button>
+                        <button
+                            class="px-4 py-2 bg-blue-50 text-blue-600 rounded-full hover:bg-blue-100 transition-all">Same
+                            Day Delivery</button>
+                    </div>
+                </div>
+
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold">Search Results</h2>
+                    <p class="text-gray-600">Showing 12 results for "birthday flowers"</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Search results -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <img src="https://placehold.co/600x400"
+                            alt="Bright mixed bouquet with pink peonies, yellow roses and white daisies"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Joyful Celebration</h3>
+                            <p class="text-gray-600 text-sm mb-2">Medium bouquet • 18 stems</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$59.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <img src="https://placehold.co/600x400"
+                            alt="Elegant pink roses bouquet with baby's breath accents"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Sweet Elegance</h3>
+                            <p class="text-gray-600 text-sm mb-2">Premium bouquet • 15 roses</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$69.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <img src="https://placehold.co/600x400"
+                            alt="Sunflower bouquet with greenery in kraft paper wrapping"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Sunny Day</h3>
+                            <p class="text-gray-600 text-sm mb-2">Small bouquet • 9 sunflowers</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$45.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <img src="https://placehold.co/600x400" alt="Colorful wildflower arrangement in a rustic basket"
+                            class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Wildflower Charm</h3>
+                            <p class="text-gray-600 text-sm mb-2">Large arrangement • Seasonal</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$75.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Catalog Page -->
+            <div id="catalog-page" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="mb-8 flex justify-between items-center">
+                    <h1 class="text-2xl font-bold">Shop Our Collection</h1>
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm text-gray-600">Sort by:</span>
+                        <select class="border rounded px-3 py-1 text-sm">
+                            <option>Most Popular</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest Arrivals</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <!-- Flower items -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x400"
+                                alt="Red roses bouquet with black satin ribbon wrapping"
+                                class="w-full hHalf object-cover">
+                            <div class="absolute bottom-2 right-2">
+                                <button class="bg-white p-2 rounded-full shadow-md hover:bg-blue-50 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Eternal Romance</h3>
+                            <p class="text-gray-600 text-sm mb-2">Premium red roses • 12 stems</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$89.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x400" alt="Pastel pink and white peonies arrangement"
+                                class="w-full hHalf object-cover">
+                            <div class="absolute bottom-2 right-2">
+                                <button class="bg-white p-2 rounded-full shadow-md hover:bg-blue-50 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Blushing Beauty</h3>
+                            <p class="text-gray-600 text-sm mb-2">Peonies bouquet • 8 stems</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$85.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x400"
+                                alt="White orchids and green foliage in a ceramic vase"
+                                class="w-full hHalf object-cover">
+                            <div class="absolute bottom-2 right-2">
+                                <button class="bg-white p-2 rounded-full shadow-md hover:bg-blue-50 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Tokyo Orchid</h3>
+                            <p class="text-gray-600 text-sm mb-2">Orchid arrangement • 5 stems</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$95.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                        <div class="relative">
+                            <img src="https://placehold.co/600x400" alt="Mixed seasonal flowers in a rustic wooden box"
+                                class="w-full hHalf object-cover">
+                            <div class="absolute bottom-2 right-2">
+                                <button class="bg-white p-2 rounded-full shadow-md hover:bg-blue-50 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-1">Harvest Bounty</h3>
+                            <p class="text-gray-600 text-sm mb-2">Seasonal box • Large</p>
+                            <div class="flex justify-between items-center">
+                                <span class="font-bold text-blue-600">$109.99</span>
+                                <button class="text-blue-600 hover:text-blue-800 font-medium">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flower Detail Page -->
+            <div id="detail-page" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <div class="md:flex">
+                        <div class="md:w-1/2">
+                            <img src="https://placehold.co/800x600"
+                                alt="Luxury arrangement of red and pink roses with greenery"
+                                class="w-full h-full object-cover">
+                        </div>
+                        <div class="md:w-1/2 p-6">
+                            <h1 class="text-3xl font-bold mb-2">Passionate Blooms</h1>
+                            <p class="text-gray-600 mb-4">Premium Red & Pink Roses Bouquet</p>
+                            <div class="flex items-center mb-4">
+                                <div class="flex text-yellow-400">
+                                    ★ ★ ★ ★ ★
+                                </div>
+                                <span class="text-sm text-gray-600 ml-2">24 reviews</span>
+                            </div>
+                            <p class="text-2xl font-bold text-blue-600 mb-6">$89.99</p>
+
+                            <div class="mb-6">
+                                <h3 class="font-bold mb-2">Description</h3>
+                                <p class="text-gray-700">Our signature Passionate Blooms arrangement features 18 premium
+                                    red and pink roses accented with lush greenery. Hand-tied with our signature satin
+                                    ribbon, this bouquet is perfect for romantic occasions.</p>
+                            </div>
+
+                            <div class="mb-6">
+                                <h3 class="font-bold mb-2">Details</h3>
+                                <ul class="space-y-2 text-gray-700">
+                                    <li>• Approximately 18" tall</li>
+                                    <li>• Available in red/pink or all red</li>
+                                    <li>• Includes premium greenery accents</li>
+                                    <li>• Hand-tied with satin ribbon</li>
+                                    <li>• Shipped in bud stage for longest lasting freshness</li>
+                                </ul>
+                            </div>
+
+                            <div class="mb-6">
+                                <h3 class="font-bold mb-2">Quantity</h3>
+                                <div class="flex items-center border rounded w-max">
+                                    <button class="px-3 py-1 text-lg">-</button>
+                                    <span class="px-4 py-1 border-x">1</span>
+                                    <button class="px-3 py-1 text-lg">+</button>
+                                </div>
+                            </div>
+
+                            <div class="flex space-x-4">
+                                <button
+                                    class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-md transition-all">
+                                    Add to Cart
+                                </button>
+                                <button
+                                    class="flex-1 bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 font-medium py-3 rounded-md transition-all">
+                                    Buy Now
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <h2 class="text-2xl font-bold mb-6">You May Also Like</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                            <img src="https://placehold.co/400x300" alt="White lilies bouquet with eucalyptus accents"
+                                class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold">Pure Elegance</h3>
+                                <p class="text-gray-600 text-sm mb-2">White lilies bouquet</p>
+                                <p class="font-bold text-blue-600">$65.99</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                            <img src="https://placehold.co/400x300" alt="Mixed pink flowers arrangement"
+                                class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold">Pink Symphony</h3>
+                                <p class="text-gray-600 text-sm mb-2">Mixed flowers</p>
+                                <p class="font-bold text-blue-600">$59.99</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                            <img src="https://placehold.co/400x300" alt="Yellow roses with baby's breath"
+                                class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold">Sunshine Joy</h3>
+                                <p class="text-gray-600 text-sm mb-2">Yellow roses</p>
+                                <p class="font-bold text-blue-600">$55.99</p>
+                            </div>
+                        </div>
+                        <div class="bg-white rounded-lg overflow-hidden shadow-sm flower-card card-hover">
+                            <img src="https://placehold.co/400x300" alt="Lavender bouquet with purple accents"
+                                class="w-full h-40 object-cover">
+                            <div class="p-4">
+                                <h3 class="font-bold">Lavender Dream</h3>
+                                <p class="text-gray-600 text-sm mb-2">Purple bouquet</p>
+                                <p class="font-bold text-blue-600">$62.99</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Page -->
+            <div id="order-page" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="mb-6 flex items-center space-x-2">
+                    <button onclick="navigateTo('cart')" class="text-blue-600 hover:text-blue-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <h1 class="text-2xl font-bold">Complete Your Order</h1>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="md:col-span-2">
+                        <div class="bg-white p-6 rounded-lg shadow-sm mb-6">
+                            <h2 class="text-xl font-bold mb-4">Delivery Information</h2>
+                            <form>
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                                        <input type="text"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                            value="John">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                                        <input type="text"
+                                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                            value="Doe">
+                                    </div>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                                    <input type="tel"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        value="(555) 123-4567">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Address</label>
+                                    <textarea
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        rows="3">123 Flower Lane, Apt 4B\nNew York, NY 10001</textarea>
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Delivery Date</label>
+                                    <input type="date"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        value="2023-07-15">
+                                </div>
+
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Delivery
+                                        Instructions</label>
+                                    <textarea
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        rows="2" placeholder="Any special delivery instructions?"></textarea>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-lg shadow-sm">
+                            <h2 class="text-xl font-bold mb-4">Payment Method</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-center border rounded-lg p-4">
+                                    <input type="radio" name="payment" id="credit-card" checked
+                                        class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                                    <label for="credit-card" class="ml-3 block">
+                                        <span class="font-medium">Credit/Debit Card</span>
+                                        <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label class="block text-sm text-gray-700 mb-1">Card Number</label>
+                                                <input type="text" placeholder="1234 5678 9012 3456"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm text-gray-700 mb-1">Expiry Date</label>
+                                                <input type="text" placeholder="MM/YY"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm text-gray-700 mb-1">CVV</label>
+                                                <input type="text" placeholder="123"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                            </div>
+                                            <div>
+                                                <label class="block text-sm text-gray-700 mb-1">Name on Card</label>
+                                                <input type="text" placeholder="John Doe"
+                                                    class="w-full px-3 py-2 border border-gray-300 rounded-md">
+                                            </div>
+                                        </div>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center border rounded-lg p-4">
+                                    <input type="radio" name="payment" id="paypal"
+                                        class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                                    <label for="paypal" class="ml-3 block">
+                                        <span class="font-medium">PayPal</span>
+                                        <p class="text-sm text-gray-600 mt-1">You'll be redirected to PayPal to complete
+                                            your purchase</p>
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center border rounded-lg p-4">
+                                    <input type="radio" name="payment" id="apple-pay"
+                                        class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                                    <label for="apple-pay" class="ml-3 block">
+                                        <span class="font-medium">Apple Pay</span>
+                                        <p class="text-sm text-gray-600 mt-1">Pay securely with Apple Pay</p>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-1">
+                        <div class="bg-white p-6 rounded-lg shadow-sm sticky top-4">
+                            <h2 class="text-xl font-bold mb-4">Order Summary</h2>
+                            <div class="space-y-4 mb-6">
+                                <div class="flex justify-between">
+                                    <span>Passionate Blooms Bouquet</span>
+                                    <span>$89.99</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Delivery Fee</span>
+                                    <span>$12.99</span>
+                                </div>
+                                <div class="flex justify-between border-t pt-4">
+                                    <span class="font-medium">Subtotal</span>
+                                    <span>$102.98</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Tax</span>
+                                    <span>$8.24</span>
+                                </div>
+                                <div class="flex justify-between border-t pt-4 font-bold text-lg">
+                                    <span>Total</span>
+                                    <span>$111.22</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500">
+                                    <span class="ml-2 text-sm text-gray-700">Save my information for a faster
+                                        checkout</span>
+                                </label>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="flex items-center">
+                                    <input type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500" checked>
+                                    <span class="ml-2 text-sm text-gray-700">Get updates about my order via
+                                        WhatsApp</span>
+                                </label>
+                            </div>
+
+                            <button onclick="navigateTo('confirmation')"
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 rounded-md transition-all">
+                                Place Order
+                            </button>
+
+                            <p class="text-xs text-gray-500 mt-4">By placing your order, you agree to our <a href="#"
+                                    class="text-blue-600">Terms of Service</a> and <a href="#"
+                                    class="text-blue-600">Privacy Policy</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Confirmation Page -->
+            <div id="confirmation-page" class="page max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-green-600" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <h1 class="text-3xl font-bold mb-4">Order Confirmed!</h1>
+                    <p class="text-gray-600 mb-6">Thank you for your purchase, John. Your order #ORD-28765 has been
+                        confirmed.</p>
+
+                    <div class="bg-blue-50 p-6 rounded-lg mb-8 text-left">
+                        <h3 class="font-bold mb-3">Delivery Information</h3>
+                        <p class="mb-1">123 Flower Lane, Apt 4B</p>
+                        <p class="mb-1">New York, NY 10001</p>
+                        <p class="mb-3">(555) 123-4567</p>
+                        <p><span class="font-medium">Delivery Date:</span> July 15, 2023</p>
+                    </div>
+
+                    <div class="flex justify-center space-x-4">
+                        <button onclick="navigateTo('home')"
+                            class="bg-white border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-md font-medium transition-all">
+                            Continue Shopping
+                        </button>
+                        <button onclick="navigateTo('order-tracking')"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md font-medium transition-all">
+                            Track My Order
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Tracking Page -->
+            <div id="order-tracking-page" class="page max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="bg-white p-8 rounded-lg shadow-sm">
+                    <h1 class="text-2xl font-bold mb-6">Track Your Order #ORD-28765</h1>
+
+                    <div class="mb-8">
+                        <div class="flex justify-between mb-2">
+                            <span class="font-medium">Passionate Blooms Bouquet</span>
+                            <span>$89.99</span>
+                        </div>
+                        <div class="flex justify-between text-gray-600 text-sm mb-4">
+                            <span>Expected delivery: July 15, 2023</span>
+                            <span>Qty: 1</span>
+                        </div>
+                        <div class="border-t pt-4">
+                            <div class="flex justify-between font-medium">
+                                <span>Order Total</span>
+                                <span>$111.22</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-6">
+                        <h2 class="text-lg font-bold mb-6">Delivery Status</h2>
+                        <div class="relative">
+                            <!-- Timeline -->
+                            <div class="absolute left-4 top-0 h-full w-0.5 bg-blue-200"></div>
+
+                            <!-- Timeline Steps -->
+                            <div class="relative mb-8 pl-10">
+                                <div
+                                    class="absolute left-0 top-0 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold mb-1">Order Confirmed</h3>
+                                <p class="text-gray-600 text-sm">July 10, 2023 • 10:30 AM</p>
+                                <p class="mt-2">Your order has been received and confirmed.</p>
+                            </div>
+
+                            <div class="relative mb-8 pl-10">
+                                <div
+                                    class="absolute left-0 top-0 w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold mb-1">Processing</h3>
+                                <p class="text-gray-600 text-sm">July 11, 2023 • 9:15 AM</p>
+                                <p class="mt-2">Your flowers are being prepared by our florists.</p>
+                            </div>
+
+                            <div class="relative mb-8 pl-10">
+                                <div
+                                    class="absolute left-0 top-0 w-8 h-8 rounded-full bg-blue-200 flex items-center justify-center text-white">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold mb-1">Out for Delivery</h3>
+                                <p class="text-gray-600 text-sm">Expected July 15, 2023</p>
+                                <p class="mt-2">Your flowers will be delivered on your selected date.</p>
+                            </div>
+
+                            <div class="relative pl-10">
+                                <div
+                                    class="absolute left-0 top-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-400">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7" />
+                                    </svg>
+                                </div>
+                                <h3 class="font-bold mb-1">Delivered</h3>
+                                <p class="text-gray-600 text-sm">Not yet delivered</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 border-t pt-6">
+                        <h2 class="text-lg font-bold mb-4">Need Help?</h2>
+                        <p class="mb-4">If you have any questions about your order, please contact our customer service
+                            team.</p>
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium transition-all">
+                            Contact Support
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard Page -->
+            <div id="admin-dashboard-page" class="page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <h1 class="text-2xl font-bold mb-8">Admin Dashboard</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-gray-500 text-sm font-medium mb-1">Today's Orders</h3>
+                        <p class="text-2xl font-bold">12</p>
+                        <p class="text-green-600 text-sm mt-1">↑ 8% from yesterday</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-gray-500 text-sm font-medium mb-1">Revenue</h3>
+                        <p class="text-2xl font-bold">$1,245</p>
+                        <p class="text-green-600 text-sm mt-1">↑ 12% from yesterday</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-gray-500 text-sm font-medium mb-1">Pending Deliveries</h3>
+                        <p class="text-2xl font-bold">7</p>
+                        <p class="text-red-600 text-sm mt-1">↓ 2 from yesterday</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-gray-500 text-sm font-medium mb-1">Customer Satisfaction</h3>
+                        <p class="text-2xl font-bold">4.8</p>
+                        <div class="flex text-yellow-400 mt-1">
+                            ★ ★ ★ ★ ★
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="lg:col-span-2 bg-white p-6 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-bold">Recent Orders</h2>
+                            <button class="text-blue-600 hover:text-blue-800 font-medium">View All</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Order #</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Customer</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Date</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status</th>
+                                        <th
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="bg-white divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
+                                            #ORD-28765</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">John Doe</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">July 10, 2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">Processing</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">$111.22</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
+                                            #ORD-28764</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">Sarah Johnson</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">July 10, 2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Delivered</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">$89.99</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-blue-600">
+                                            #ORD-28763</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">Michael Chen</td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm">July 9, 2023</td>
+                                        <td class="px-6 py-4 whitespace-nowrap">
+                                            <span
+                                                class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Shipped</span>
+                                        </td>
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">$145.50</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h2 class="text-lg font-bold mb-4">Quick Actions</h2>
+                        <div class="space-y-3">
+                            <button
+                                class="w-full text-left px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md transition-all flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                </svg>
+                                Add New Product
+                            </button>
+                            <button
+                                class="w-full text-left px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md transition-all flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                </svg>
+                                Manage Inventory
+                            </button>
+                            <button
+                                class="w-full text-left px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md transition-all flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                                </svg>
+                                View Reports
+                            </button>
+                            <button
+                                class="w-full text-left px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-600 rounded-md transition-all flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                Customer Management
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">Sapphire Florist</h3>
+                        <p class="text-gray-400">Luxury floral arrangements crafted with passion and precision for
+                            life's most precious moments.</p>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Shop</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" onclick="navigateTo('catalog')"
+                                    class="text-gray-400 hover:text-white transition-all">All Collections</a></li>
+                            <li><a href="#" onclick="navigateTo('catalog')"
+                                    class="text-gray-400 hover:text-white transition-all">Seasonal Flowers</a></li>
+                            <li><a href="#" onclick="navigateTo('catalog')"
+                                    class="text-gray-400 hover:text-white transition-all">Wedding Flowers</a></li>
+                            <li><a href="#" onclick="navigateTo('catalog')"
+                                    class="text-gray-400 hover:text-white transition-all">Gifts & Add-ons</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Company</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#" onclick="navigateTo('about')"
+                                    class="text-gray-400 hover:text-white transition-all">About Us</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all">Careers</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all">Blog</a></li>
+                            <li><a href="#" class="text-gray-400 hover:text-white transition-all">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-sm font-semibold uppercase tracking-wider mb-4">Connect</h4>
+                        <div class="flex space-x-4 mb-4">
+                            <a href="#" class="text-gray-400 hover:text-white transition-all">
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" />
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-all">
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" />
+                                </svg>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-white transition-all">
+                                <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                                </svg>
+                            </a>
+                        </div>
+                        <p class="text-gray-400">Subscribe to our newsletter</p>
+                        <div class="mt-2 flex">
+                            <input type="email" placeholder="Your email"
+                                class="px-3 py-2 bg-gray-800 text-white rounded-l-md focus:outline-none focus:ring-1 focus:ring-blue-500 w-full">
+                            <button
+                                class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-r-md transition-all">→</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
+                    <p>© 2023 Sapphire Florist. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            setTimeout(() => {
+                document.getElementById("splash-screen").classList.remove("active-page");
+                document.getElementById("splash-screen").style.display = "none";
+                document.getElementById("app").style.display = "flex";
+            }, 2000); // show splash screen for 2 seconds
+        });
+        // Simple navigation system
+        function navigateTo(page) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(el => {
+                el.classList.remove('active-page');
+            });
+
+            // Show selected page
+            document.getElementById(`${page}-page`).classList.add('active-page');
+
+            // Update active nav link (if applicable)
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.remove('active');
+            });
+
+            // For splash screen transition
+            if (page !== 'splash') {
+                document.getElementById('app').style.display = 'flex';
+                setTimeout(() => {
+                    document.getElementById('splash-screen').classList.remove('active-page');
+                }, 300);
+            }
+        }
+
+        // Simulate splash screen
+        setTimeout(() => {
+            navigateTo('home');
+        }, 2000);
+
+        // Simple cart counter
+        let cartCount = 0;
+        function updateCartCount() {
+            document.getElementById('cart-count').textContent = cartCount;
+        }
+
+        // Example of adding to cart (would be connected to actual buttons in a real app)
+        function addToCart() {
+            cartCount++;
+            updateCartCount();
+        }
+    </script>
+</body>
+
+</html>
